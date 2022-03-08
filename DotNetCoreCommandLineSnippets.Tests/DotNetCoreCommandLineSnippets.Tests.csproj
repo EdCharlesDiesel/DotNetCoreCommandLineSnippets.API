@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetCoreCommandLineSnippets.API\DotNetCoreCommandLineSnippets.API.csproj" />
+  </ItemGroup>
+
 </Project>
