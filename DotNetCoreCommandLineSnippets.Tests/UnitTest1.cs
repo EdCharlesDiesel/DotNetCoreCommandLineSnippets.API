@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CommandAPI.Tests;
+namespace DotNetCoreCommandLineSnippets.Tests;
 
 public class UnitTest1
 {
