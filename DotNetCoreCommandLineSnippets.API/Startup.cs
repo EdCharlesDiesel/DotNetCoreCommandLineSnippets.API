@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using DotNetCoreCommandLineSnippets.API.Services;
 using DotNetCoreCommandLineSnippets.API.Repostory;
 using DotNetCoreCommandLineSnippets.API.Contexts;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace DotNetCoreCommandLineSnippets.API
 {
@@ -35,7 +29,8 @@ namespace DotNetCoreCommandLineSnippets.API
 
             services.AddControllers();
 
-             //Add the code below
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            
             services.AddScoped<ICommandAPIService,SqlCommandAPIRepo >();
             services.AddSwaggerGen(c =>
             {
