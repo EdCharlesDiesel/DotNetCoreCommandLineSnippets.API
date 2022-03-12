@@ -1,12 +1,14 @@
-namespace DotNetCoreCommandLineSnippets.API.Models;
 
+using System.ComponentModel.DataAnnotations;
+namespace DotNetCoreCommandLineSnippets.API.Models
+{
 public class Command
  {
    [Key]
    [Required]
    public int Id {get; set;}
  
-   [Required]
+	[Required]
    [MaxLength(250)]
    public string HowTo {get; set;}
     
@@ -15,4 +17,5 @@ public class Command
  
    [Required]
    public string CommandLine {get; set;}
- }
+}
+}

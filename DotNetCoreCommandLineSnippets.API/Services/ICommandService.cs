@@ -1,17 +1,20 @@
 using System.Collections.Generic;
-namespace DotNetCoreCommandLineSnippets.API.Services;
+using DotNetCoreCommandLineSnippets.API.Models;
+namespace DotNetCoreCommandLineSnippets.API.Services
+{
 
 public interface ICommandAPIRepo
  {
-    bool SaveChanges();
+   bool SaveChanges();
     
-    IEnumerable<Command> GetAllCommands();
+   IEnumerable<Command> GetAllCommands();
     
-    Command GetCommandById(int id);
+   Command GetCommandById(int id);
     
-    void CreateCommand(Command cmd);
+   void CreateCommand(Command cmd);
     
-    void UpdateCommand(Command cmd);
+   void UpdateCommand(Command cmd);
     
-    void DeleteCommand(Command cmd);
+   void DeleteCommand(Command cmd);
  }
+}
