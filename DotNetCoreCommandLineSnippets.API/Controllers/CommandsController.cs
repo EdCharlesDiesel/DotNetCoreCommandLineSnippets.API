@@ -18,6 +18,9 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
             _mapper=mapper;
         }
 
+        ///<summary>
+        /// Get all resources.
+        ///</summary>
         [HttpGet]
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
@@ -25,6 +28,9 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
+        ///<summary>
+        /// Get a resource(by id).
+        ///</summary>
         [HttpGet("{id}", Name="GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
@@ -36,6 +42,9 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
             return Ok(_mapper.Map<CommandReadDto>(commandItem));
         }
 
+        ///<summary>
+        /// Create a new resource.
+        ///</summary>
         [HttpPost]
         public ActionResult <CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
         {
@@ -47,6 +56,22 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
         }
 
+        ///<summary>
+        /// Update a new resource.
+        ///</summary>
+        [HttpPut("{id}")]
+        public ActionResult UpdateCommand(int id, CommandUpdateDto commandUpdateDto)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if (commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(commandUpdateDto, commandModelFromRepo);
+            _repository.UpdateCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
