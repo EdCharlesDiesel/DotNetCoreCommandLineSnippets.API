@@ -13,27 +13,29 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using DotNetCoreCommandLineSnippets.API.Services;
 using DotNetCoreCommandLineSnippets.API.Repostory;
-
+using DotNetCoreCommandLineSnippets.API.Contexts;
 
 namespace DotNetCoreCommandLineSnippets.API
 {
     public class Startup
     {
+        public IConfiguration Configuration {get;}
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DbContext>(opt => opt.UseSqlServer
+                 (Configuration.GetConnectionString("CommandSqlConnection")));
 
             services.AddControllers();
 
              //Add the code below
-            services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
+            services.AddScoped<ICommandAPIRepo,SqlCommandAPIRepo >();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CommandAPI", Version = "v1" });
