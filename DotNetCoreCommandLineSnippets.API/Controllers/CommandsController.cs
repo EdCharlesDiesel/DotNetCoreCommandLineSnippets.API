@@ -97,6 +97,22 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
             _repository.SaveChanges();
             return NoContent();
         }
+
+        ///<summary>
+        /// Delete a single resource (by Id)
+        ///</summary>
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(int id)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if(commandModelFromRepo == null)
+            {
+            return NotFound();
+            }
+            _repository.DeleteCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+        }
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
