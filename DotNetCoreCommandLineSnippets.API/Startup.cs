@@ -9,6 +9,7 @@ using DotNetCoreCommandLineSnippets.API.Repostory;
 using DotNetCoreCommandLineSnippets.API.Contexts;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Newtonsoft.Json.Serialization;
 
 namespace DotNetCoreCommandLineSnippets.API
 {
@@ -27,10 +28,12 @@ namespace DotNetCoreCommandLineSnippets.API
             services.AddDbContext<CommandContext>(opt => opt.UseSqlServer
                  (Configuration.GetConnectionString("CommandSqlConnection")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            
             services.AddScoped<ICommandAPIService,SqlCommandAPIRepo >();
             services.AddSwaggerGen(c =>
             {
