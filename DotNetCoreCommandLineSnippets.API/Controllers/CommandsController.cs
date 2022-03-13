@@ -13,8 +13,8 @@ namespace DotNetCoreCommandLineSnippets.API.Controllers
     [Route("[controller]")]
     public class CommandsController : ControllerBase
     {
-        private readonly ICommandAPIRepo _repository;
-        public CommandsController(ICommandAPIRepo repository)
+        private readonly ICommandAPIService _repository;
+        public CommandsController(ICommandAPIService repository)
         {
             _repository = repository;
         }

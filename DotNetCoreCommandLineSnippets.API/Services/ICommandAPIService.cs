@@ -3,7 +3,7 @@ using DotNetCoreCommandLineSnippets.API.Models;
 namespace DotNetCoreCommandLineSnippets.API.Services
 {
 
-public interface ICommandAPIRepo
+public interface ICommandAPIService
  {
    bool SaveChanges();
     

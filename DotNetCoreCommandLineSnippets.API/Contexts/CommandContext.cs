@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using DotNetCoreCommandLineSnippets.API.Models;
 
+using  Microsoft.EntityFrameworkCore;
 namespace DotNetCoreCommandLineSnippets.API.Contexts
 {
  public class CommandContext : DbContext
@@ -10,7 +11,5 @@ namespace DotNetCoreCommandLineSnippets.API.Contexts
     {
     }
     public DbSet<Command> CommandItems {get; set;}
-    {
-
-    }
+ }
 }
