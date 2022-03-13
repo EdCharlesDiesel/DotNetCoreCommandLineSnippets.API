@@ -1,6 +1,7 @@
 using AutoMapper;
 using DotNetCoreCommandLineSnippets.API.Dtos;
 using DotNetCoreCommandLineSnippets.API.Models;
+
 namespace DotNetCoreCommandLineSnippets.API.Profiles
 {
     public class CommandsProfile : Profile
