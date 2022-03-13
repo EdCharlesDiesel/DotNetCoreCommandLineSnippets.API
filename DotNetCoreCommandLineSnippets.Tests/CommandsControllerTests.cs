@@ -146,6 +146,42 @@ namespace DotNetCoreCommandLineSnippets.Tests
             Assert.IsType<ActionResult<CommandReadDto>>(result);
         }
 
+        [Fact]
+        public void CreateCommand_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
+        {
+            //Arrange
+            mockRepo.Setup(repo =>
+            repo.GetCommandById(1)).Returns(new Command { Id = 1,
+            HowTo = "mock",
+            Platform = "Mock",
+            CommandLine = "Mock" });
+            var controller = new CommandsController(mockRepo.Object, mapper);
+           
+            //Act
+            var result = controller.CreateCommand(new CommandCreateDto { });
+           
+            //Assert
+            Assert.IsType<ActionResult<CommandReadDto>>(result);
+        }
+
+        [Fact]
+        public void CreateCommand_Returns201Created_WhenValidObjectSubmitted()
+        {
+            //Arrange
+            mockRepo.Setup(repo =>
+            repo.GetCommandById(1)).Returns(new Command { Id = 1,
+            HowTo = "mock",
+            Platform = "Mock",
+            CommandLine = "Mock" });
+            var controller = new CommandsController(mockRepo.Object, mapper);
+            
+            //Act
+            var result = controller.CreateCommand(new CommandCreateDto { });
+            
+            //Assert
+            Assert.IsType<CreatedAtRouteResult>(result.Result);
+        }
+
         private List<Command> GetCommands(int num)
         {
             var commands = new List<Command>();
